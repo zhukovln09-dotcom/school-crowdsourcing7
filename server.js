@@ -45,6 +45,42 @@ app.get('/api/health', async (req, res) => {
     }
 });
 
+// API для новостей (прокси)
+app.get('/api/news', async (req, res) => {
+    try {
+        // Пробуем получить новости с локального сервера новостей
+        const newsResponse = await fetch('http://localhost:3001/api/news');
+        
+        if (newsResponse.ok) {
+            const newsData = await newsResponse.json();
+            res.json(newsData);
+        } else {
+            // Возвращаем демо-данные если сервер новостей не доступен
+            res.json([
+                {
+                    id: 'news_1',
+                    title: 'День открытых дверей',
+                    excerpt: 'Приглашаем всех на день открытых дверей',
+                    content: 'Полный текст новости...',
+                    date: new Date().toISOString(),
+                    category: 'Мероприятия'
+                },
+                {
+                    id: 'news_2',
+                    title: 'Новые достижения',
+                    excerpt: 'Ученики победили на олимпиаде',
+                    content: 'Полный текст новости...',
+                    date: new Date().toISOString(),
+                    category: 'Достижения'
+                }
+            ]);
+        }
+    } catch (error) {
+        console.error('Ошибка получения новостей:', error);
+        res.json([]);
+    }
+});
+
 // Получить статистику
 app.get('/api/stats', async (req, res) => {
     try {
@@ -230,4 +266,5 @@ app.listen(PORT, () => {
     console.log(`🌐 Сайт: http://localhost:${PORT}`);
     console.log(`📊 MongoDB: ${process.env.MONGODB_URI ? 'Настроен' : 'Используется локальная строка'}`);
 });
+
 

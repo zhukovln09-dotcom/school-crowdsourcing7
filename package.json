@@ -1,26 +1,22 @@
 {
-  "name": "school-crowdsourcing-mongo",
-  "version": "3.0.0",
-  "description": "Школьная краудсорсинговая платформа с MongoDB",
-  "main": "server.js",
+  "name": "school-crowdsourcing",
+  "version": "1.1.0",
+  "description": "Школьная платформа с системой новостей",
   "scripts": {
     "start": "node server.js",
+    "news-server": "node news-server.js",
     "dev": "nodemon server.js",
-    "mongo-dev": "MONGODB_URI=ваша_строка_подключения nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev-news": "nodemon news-server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "mongoose": "^8.0.0",
-    "cors": "^2.8.5"
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "sqlite3": "^5.1.6",
+    "pg": "^8.11.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
-  },
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "keywords": ["school", "crowdsourcing", "mongodb", "atlas", "nodejs"],
-  "author": "Школьный проект",
-  "license": "MIT"
+  }
 }
